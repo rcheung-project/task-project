@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./bootstrap.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Google fonts-->
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <title>Sprint 1</title>
+  </head>
+  <body>
+     <!--Navigation-->
+     <nav class="navbar navbar-expand-lg navbar-light bg-secondary sticky-top" id="mainNav" >
+      <div class="container px-4 px-lg-5 ">
+         <a class="navbar-brand text-white fw-bold">CodeDen</a>
+        <button
+          class="navbar-toggler text-white"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive"
+          aria-controls="navbarResponsive"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          Menu
+          <i class="fas fa-bars text-white"></i>
+        </button>
+  
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <div class="navbar-nav ms-auto py-4 py-lg-0">
+               <button type="button" class="btn btn-warning m-2 text-white fw-bold" data-bs-toggle="modal" data-bs-target="#SignUp">Sign Up</button>
+               <button type="button" class="btn btn-warning m-2 text-white fw-bold" data-bs-toggle="modal" data-bs-target="#SignIn">Sign In</button>
+              </div>
+              </div>
+      </div>
+    </nav>
+    <!--nav-end-->
+
+    <!--Modal-->
+<!--sign up modal-->
+<div class="modal  opacity-25" id="SignUp">
+  <div class="modal-dialog ">
+      <div class="modal-content ">
+          <div class="modal-header">
+              <h5 class="modal-title">Register</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="mb-3">
+                      <label class="form-label required">Name</label>
+                      <input type="text" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label required">Password</label>
+                    <input type="password" class="form-control">
+                </div>
+                  <div class="mb-3">
+                      <label class="form-label required">Email</label>
+                      <input type="email" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                      <label class="form-label required"> Your Message </label>
+                      <textarea class="form-control"></textarea>
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary text-white" data-bs-dismiss="modal"> Sign Up</button>
+          </div>
+      </div>
+  </div>
+</div>
+<!--sign in modal-->
+<div class="modal" id="SignIn">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title">Log In</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="mb-3">
+                      <label class="form-label required">Email</label>
+                      <input type="email" class="form-control">
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label required">Password</label>
+                    <input type="password" class="form-control">
+                </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-secondary text-white" data-bs-dismiss="modal">Login</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- jumbotron-->
+<div class="container-fluid jumbotron">
+<div class="jumbotron-fluid">
+  <div class="lead">
+    <h2 class=" text-center text-white fw-bold fs-9 fst-italic " style="letter-spacing:2px ;"> ““We acknowledge the Traditional Custodians of the land We pay our respects to Elders past and present, and extend that respect to all First Nations people present today.””</h2>
+  </div>
+  </div>
+</div>
+
+    <!--Form input-->
+    <div class="container py-5 ">
+      <div class="row ">
+        <div class="col-lg-6 mx-auto " >
+          <div class="card shadow-lg" >
+            <div class="card-body">
+              <h5 class="card-title text-center mb-5 fs-9 bg-secondary text-white py-5">Tasks Form</h5>
+              <form id="form" action="#task-card" method="GET" >
+                 <!--Input Task-->
+                <div class="input-group">
+                  <label for="inputValue">Task Name </label>
+                  <input
+                      id="InputValue"
+                      type="text"
+                      placeholder="Task Name"
+                      name="InputValue"
+                    />
+                    <p>Error message</p>
+                </div>
+                <!--Input assigned-->
+                <div class="input-group">
+                  <label for="assignValue">Assign To</label>
+                  <select id="assignValue" name="assignValue">
+                    <option value="">Assigned To</option>
+                    <option value="1">Maria</option>
+                    <option value="2">Riki</option>
+                    <option value="3">Shahan</option>
+                    <option value="4">Ben</option>
+                  </select>
+                  <p>Error Message</p>
+                </div>
+                <!--Input Status-->
+                <div class="input-group">
+                  <label for="statusValue">Status</label>
+                  <select id="statusValue" name="statusValue">
+                    <option value="">Status</option>
+                    <option value="1">Started</option>
+                    <option value="2">In-Progress</option>
+                    <option value="3">Revieved</option>
+                    <option value="4">Finished</option>
+                  </select>
+                  <p>Error Message</p>
+                </div>
+                <div class="col-lg-8 mx-auto mt-5 text-dark input-group">
+                  <label for="dateValue">Due Date :</label>
+                 <input id="dateValue" type="datetime-local" name="dateValue"/>
+                 <p>Error Message</p>
+                </div>
+                 <!--Due Date-->
+                <div class="input-group">
+                  <label for="descValue">Description </label>
+                  <textarea id="descValue" name="descValue" rows="4" cols="50"></textarea>
+                  <p>Error Message</p>
+                </div>
+                
+                <button type="submit" class="btn btn-warning">Submit</button>
+                <input type="reset" class="btn btn-warning ms-5" >
+              </form>
+          
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+<!--Card Section-->
+
+<div class="container bg-light py-4 mt-5 " id="task-card" >
+  <h2 class="text-center mb-5">Task Details</h2>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100 bg-warning">
+      <div class="card-body">
+        <h5 class="card-title border-bottom">Wireframing</h5>
+        <p> <span class="fw-bold">Due Date:</span> 28/10/2022 </p>
+        <p><span class="fw-bold">Asigned To:</span>Rikki</p>
+        <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#Wireframing">View Task</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100 bg-warning">
+      <div class="card-body">
+        <h5 class="card-title border-bottom">Html/CSS</h5>
+        <p> <span class="fw-bold">Due Date:</span> 29/10/2022 </p>
+        <p><span class="fw-bold">Asigned To:</span>Maria</p>
+        <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#html-css">View Task</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100 bg-warning">
+      <div class="card-body">
+        <h5 class="card-title border-bottom">Bootstrap </h5>
+        <p> <span class="fw-bold">Due Date:</span> 30/10/2022 </p>
+        <p><span class="fw-bold">Asigned To:</span>Rikki</p>
+        <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#bootstrap">View Task</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100 bg-warning">
+      <div class="card-body">
+        <h5 class="card-title border-bottom">Responsive Design</h5>
+        <p> <span class="fw-bold">Due Date:</span> 30/10/2022 </p>
+        <p><span class="fw-bold">Asigned To:</span>Shahan</p>
+        <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#responsive">View Task</button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col">
+    <div class="card h-100 bg-warning">
+      <div class="card-body">
+        <h5 class="card-title border-bottom">Dynamic Layout With Javascript </h5>
+        <p> <span class="fw-bold">Due Date:</span> 30/10/2022 </p>
+        <p><span class="fw-bold">Asigned To:</span>Rikki</p>
+        <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#js">View Task</button>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+  <div class="card h-100 bg-warning">
+    <div class="card-body">
+      <h5 class="card-title border-bottom">React Component</h5>
+      <p> <span class="fw-bold">Due Date:</span> 31/10/2022 </p>
+      <p><span class="fw-bold">Asigned To:</span>Maria</p>
+      <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#react">View Task</button>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<!--card modal-->
+<div class="modal" id="Wireframing">
+  <div class="modal-dialog ">
+    <div class="modal-content bg-light text-dark">
+      <div class="modal-header bg-success opacity-75 ">
+        <h5 class="modal-title">Wireframing</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><span class="fw-bold">Task Description - </span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore quasi, exercitationem fuga eaque vitae ex nostrum autem atque modi est quos vel veritatis possimus nihil magnam necessitatibus facilis rerum. Eum.</p>
+      </div>
+      <div class="modal-status ">
+        <h6 class="mx-3">Status: <span>Finished</span></h6>
+      </div>
+      <div class="progress mx-5 mb-4">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="html-css">
+  <div class="modal-dialog ">
+    <div class="modal-content bg-white">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title">HTML/CSS layout Design</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><span class="fw-bold">Task Description - </span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore quasi, exercitationem fuga eaque vitae ex nostrum autem atque modi est quos vel veritatis possimus nihil magnam necessitatibus facilis rerum. Eum.</p>
+      </div>
+      <div class="modal-status ">
+        <h6 class="mx-3">Status: <span>In-Progress</span></h6>
+      </div>
+      <div class="progress mx-5 mb-4">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="bootstrap">
+  <div class="modal-dialog ">
+    <div class="modal-content bg-white">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title">Bootstrap Landing Page</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><span class="fw-bold">Task Description - </span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore quasi, exercitationem fuga eaque vitae ex nostrum autem atque modi est quos vel veritatis possimus nihil magnam necessitatibus facilis rerum. Eum.</p>
+      </div>
+      <div class="modal-status ">
+        <h6 class="mx-3">Status: <span>In-Review</span></h6>
+      </div>
+      <div class="progress mx-5 mb-4">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" aria-valuenow="99" aria-valuemin="0" aria-valuemax="100" style="width: 99%"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="responsive">
+  <div class="modal-dialog ">
+    <div class="modal-content bg-white">
+      <div class="modal-header bg-warning">
+        <h5 class="modal-title">Responsive Design using media querry</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><span class="fw-bold">Task Description - </span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore quasi, exercitationem fuga eaque vitae ex nostrum autem atque modi est quos vel veritatis possimus nihil magnam necessitatibus facilis rerum. Eum.</p>
+      </div>
+      <div class="modal-status ">
+        <h6 class="mx-3">Status: <span>In-Progress</span></h6>
+      </div>
+      <div class="progress mx-5 mb-4">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="js">
+  <div class="modal-dialog ">
+    <div class="modal-content bg-white">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Add Dynamic Functionality</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><span class="fw-bold">Task Description - </span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore quasi, exercitationem fuga eaque vitae ex nostrum autem atque modi est quos vel veritatis possimus nihil magnam necessitatibus facilis rerum. Eum.</p>
+      </div>
+      <div class="modal-status ">
+        <h6 class="mx-3">Status: <span>Started</span></h6>
+      </div>
+      <div class="progress mx-5 mb-4">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="react">
+  <div class="modal-dialog ">
+    <div class="modal-content bg-white">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title">Reusable React Component</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><span class="fw-bold">Task Description - </span>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolore quasi, exercitationem fuga eaque vitae ex nostrum autem atque modi est quos vel veritatis possimus nihil magnam necessitatibus facilis rerum. Eum.</p>
+      </div>
+      <div class="modal-status ">
+        <h6 class="mx-3">Status: <span>Started</span></h6>
+      </div>
+      <div class="progress mx-5 mb-4">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--our Team-->
+<section class="team py-5" id="team" >
+  <div class="container-lg py-4">
+      <div class="row justify-content-center">
+          <div class="c0l-lg-8">
+              <div class="section-title text-center">
+                  <h2 class="fw-b mb-4">Our Team</h2>
+              </div>
+              
+           </div>
+          </div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-7" >
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-indicators">
+                    <button  type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active bg-dark" aria-current="true" aria-label="Slide 1"></button>
+                    <button  type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" class=" bg-dark" aria-label="Slide 2"></button>
+                    <button  type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" class=" bg-dark" aria-label="Slide 3"></button>
+                  </div>
+              <div class="carousel-inner p-1">
+              <div class=" carousel-item active bg-white shadow-lg rounded p-4 mb-5">
+                  <div class="testi-author-info d-flex align-items-center">
+                      <img src="./images/port2.png"  alt="info" width="304" height="236">
+                      <div class="author ms-3">
+                          <h3 class="fs-6 mb-1">Shahan Ahmad</h3>
+                          <p class="text-muted m-0">Junior Front-end Developer</p>
+                      </div>
+                  </div>
+                  <p class="text-muted mt-3">Shahan has been  efficient and supportive, asked great questions that helped us think through any offer, and brought great creativity and insight to the final product.</p>
+                      <div class="rating text-danger">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                      </div>
+              </div>
+              <div class=" carousel-item  bg-white shadow-lg rounded p-4 mb-5">
+                  <div class="testi-author-info d-flex align-items-center">
+                      <img src="./images/port1.png"  alt="info" width="304" height="236">
+                      <div class="author ms-3">
+                          <h3 class="fs-6 mb-1">Rikki</h3>
+                          <p class="text-muted m-0">Junior Front-end-Developer</p>
+                      </div>
+                  </div>
+                  <p class="text-muted mt-3">With her skills and natural creativity, she works quickly and efficiently, presenting professional options and offering sound advice to translate the vision in my head into work beyond  envisioned</p>
+                      <div class="rating text-danger">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                      </div>
+              </div>
+              <div class=" carousel-item  bg-white shadow-lg rounded p-4 mb-5">
+                  <div class="testi-author-info d-flex align-items-center">
+                      <img src="./images/port.png"  alt="info" width="304" height="236">
+                      <div class="author ms-3">
+                          <h3 class="fs-6 mb-1">Maria</h3>
+                          <p class="text-muted m-0">Junior Front-end-Developer</p>
+                      </div>
+                  </div>
+                  <p class="text-muted mt-3">Maria has been terrific- collaborative, diligent, honest and professional, offering solutions we had not thought about. We have found that she delivers efficiently and in a timely manner..</p>
+                      <div class="rating text-danger">
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                          <i class="fas fa-star"></i>
+                      </div>
+              </div>
+             </div>
+           </div>
+       </div>
+    </div>
+  </div>
+</section>
+<!---->
+
+  <!--Contact-->
+                
+  
+    <div class="container py-1  contact-content bg-light">
+        <h1 class="text-center text-dark">Contact Us</h1>
+        <div class="row py-1">
+            <div class="col-lg-10 mx-auto ">
+                <div class="row text-center">
+                    <div class="col-lg-4">
+                      <div class="circle bg-warning ">
+                       <span><i class="fas fa-phone-alt "></i></span>
+                      </div>
+                      <h5 class= "text-dark">Phone</h5>
+                      <p class= "text-dark">98000***1</p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="circle bg-warning">
+                            <span><i class="fa fa-envelope "></i></span>
+                        </div>
+                        <h5 class ="text-dark">Address</h5>
+                        <p class= " text-dark">123 CodeDen street, Codeden Room
+                            Australia 0000
+                        </p>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="circle bg-warning">
+                            <span><i class="fa fa-address-card "></i></span>
+                        </div>
+                        <h5 class="text-dark">Email</h5>
+                        <p class= "text-dark">codeden@ours.com.au</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+
+<footer class="py-3 text-center bg-secondary">
+    <p>Copy Right @ CodeDen</p>
+</footer>
+   
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+      integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+      integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
