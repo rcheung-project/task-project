@@ -2,42 +2,51 @@
 
 //Variable Target///
 
-const form = document.querySelector("#form");
-const inputValue = document.getElementById("InputValue");
+/* const form = document.querySelector("#form");
+const inputValue = document.querySelector("#InputValue");
 const assignValue = document.getElementById("assignValue");
 const statusValue = document.getElementById("statusValue");
 const dateValue = document.getElementById("dateValue");
-const descValue = document.getElementById("descValue");
+const descValue = document.getElementById("descValue");  */
+
+const aName = document.getElementById("aName");
+const cardStyle = document.querySelector(".cardStyle");
+
+const aNameText = document.getElementById("aNameText");
+const cars = document.getElementById("cars");
+const subBtn = document.getElementById("subBtn");
 
 
 class Card {
-  constructor(ataskValue, aassignValue, astatusValue, adateValue, adescValue, aid ) {
-      this.taskValue = ataskValue;
-      this.assignValue = aassignValue;
-      this.statusValue = astatusValue;
-      this.dateValue = adateValue;
-      this.descValue = adescValue;
-      this.id = aid;
+  constructor(eTaskValue, eAssignValue, eStatusValue, eDateValue, eDescValue) {
+      this.taskValue = eTaskValue;
+      this.assignValue = eAssignValue;
+      this.statusValue = eStatusValue;
+      this.dateValue = eDateValue;
+      this.descValue = eDescValue;
    }
-   static addTask(element) {
-    const bbb = document.getElementById('taskCard');
-    const test = document.createElement('p');
-    test.innerHTML = `<h2>${element.ataskValue}</h2>`; 
-    const test2 = test.innerHTML;
-    console.log(test2);
-    bbb.appendChild(test2);
-  }
+    setDisplay() {
+    const mkHTML = `<div class="cardDiv">\n`    
+                 + `<p> Task: ${this.taskValue}</p>\n`
+                 + `<p>============================</p>\n`
+                 + `<p> Assigned to: ${this.assignValue}</p>\n`
+                 + `<p> Status:  ${this.statusValue}</p>\n`
+                 + `<p">Due date: ${this.dateValue}</p>\n`
+                 + `<p">To: ${this.descValue}</p>\n`
+                 + `<button class="deleteBtn">Delete</button>\n`
+                 + `</div>\n`;   
+    cardStyle.innerHTML = mkHTML;
+    console.log(mkHTML);
+    console.log("good");
+    console.log(this.taskValue);
+  } 
 }
 
-
-
-
-/* const ourCard = new Card(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value, 1);
-// console.log(ourCard);
-const showCard = document.getElementById('taskCard');
- showCard.innerHTML = "testing card";
-console.log(ourCard);  */
-
+  subBtn.addEventListener('click', displayThis);
+    function displayThis() {
+    const myCard = new Card(aName.value, cars.value, "in-progress", "12 December, 2002", "Learn React");
+    myCard.setDisplay();
+  }
 
 form.addEventListener("submit", (event) => {
   validateForm();
