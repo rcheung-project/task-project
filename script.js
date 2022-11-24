@@ -9,8 +9,42 @@ const statusValue = document.getElementById("statusValue");
 const dateValue = document.getElementById("dateValue");
 const descValue = document.getElementById("descValue");
 
+
+class Card {
+  constructor(ataskValue, aassignValue, astatusValue, adateValue, adescValue, aid ) {
+      this.taskValue = ataskValue;
+      this.assignValue = aassignValue;
+      this.statusValue = astatusValue;
+      this.dateValue = adateValue;
+      this.descValue = adescValue;
+      this.id = aid;
+   }
+   static addTask(element) {
+    const bbb = document.getElementById('taskCard');
+    const test = document.createElement('p');
+    test.innerHTML = `<h2>${element.ataskValue}</h2>`; 
+    const test2 = test.innerHTML;
+    console.log(test2);
+    bbb.appendChild(test2);
+  }
+}
+
+
+
+
+/* const ourCard = new Card(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value, 1);
+// console.log(ourCard);
+const showCard = document.getElementById('taskCard');
+ showCard.innerHTML = "testing card";
+console.log(ourCard);  */
+
+
 form.addEventListener("submit", (event) => {
   validateForm();
+  console.log(inputValue.value);
+  const ourCard = new Card(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value, 1);
+  Card.addTask(ourCard);
+  console.log(ourCard);
   if (isFormValid() == true) {
     form.submit();
   } else {
