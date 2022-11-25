@@ -10,15 +10,22 @@ const dateValue = document.getElementById("dateValue");
 const descValue = document.getElementById("descValue");
 const submitBtn = document.getElementById("submitBtn")
 
+//Code for Time and Date
 const months = ['January', 'February', "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-let time = document.getElementById('dateNtime')
-let current = new Date();
-//let cDate = `${current.getDate()} / ${(current.getMonth() + 1)} / ${current.getFullYear()}`
-let cDate = `${current.getDate()}  ${months[current.getMonth()]}  ${current.getFullYear()} <br>`
-let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
-let dateTime = cDate + ' ' + cTime;
-time.innerHTML = dateTime; 
-
+let time = document.getElementById('dateNtime') //There is a span tag for time displayed
+function addZero(i) {  //To add zero before single digits when needed
+  if (i < 10) {i = "0" + i}
+  return i;
+}
+function displayTimeDate () {
+  let current = new Date();
+  let cDate = `${current.getDate()}  ${months[current.getMonth()]}  ${current.getFullYear()} <br>`
+  let cTime = addZero(current.getHours()) + ":" + addZero(current.getMinutes()) + ":" + addZero(current.getSeconds());
+  let dateTime = cDate + ' ' + cTime;
+  time.innerHTML = dateTime; 
+}
+setInterval(displayTimeDate, 1000);
+//Code for Time and Date Over
 
 submitBtn.addEventListener("click", (event) => {
   //event.preventDefault();
