@@ -2,62 +2,34 @@
 
 //Variable Target///
 
-/* const form = document.querySelector("#form");
-const inputValue = document.querySelector("#InputValue");
+//const form = document.querySelector("#form");
+const inputValue = document.getElementById("InputValue");
 const assignValue = document.getElementById("assignValue");
 const statusValue = document.getElementById("statusValue");
 const dateValue = document.getElementById("dateValue");
-const descValue = document.getElementById("descValue");  */
+const descValue = document.getElementById("descValue");
+const submitBtn = document.getElementById("submitBtn")
 
-const aName = document.getElementById("aName");
-const cardStyle = document.querySelector(".cardStyle");
+const months = ['January', 'February', "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+let time = document.getElementById('dateNtime')
+let current = new Date();
+//let cDate = `${current.getDate()} / ${(current.getMonth() + 1)} / ${current.getFullYear()}`
+let cDate = `${current.getDate()}  ${months[current.getMonth()]}  ${current.getFullYear()} <br>`
+let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
+let dateTime = cDate + ' ' + cTime;
+time.innerHTML = dateTime; 
 
-const aNameText = document.getElementById("aNameText");
-const cars = document.getElementById("cars");
-const subBtn = document.getElementById("subBtn");
 
-
-class Card {
-  constructor(eTaskValue, eAssignValue, eStatusValue, eDateValue, eDescValue) {
-      this.taskValue = eTaskValue;
-      this.assignValue = eAssignValue;
-      this.statusValue = eStatusValue;
-      this.dateValue = eDateValue;
-      this.descValue = eDescValue;
-   }
-    setDisplay() {
-    const mkHTML = `<div class="cardDiv">\n`    
-                 + `<p> Task: ${this.taskValue}</p>\n`
-                 + `<p>============================</p>\n`
-                 + `<p> Assigned to: ${this.assignValue}</p>\n`
-                 + `<p> Status:  ${this.statusValue}</p>\n`
-                 + `<p">Due date: ${this.dateValue}</p>\n`
-                 + `<p">To: ${this.descValue}</p>\n`
-                 + `<button class="deleteBtn">Delete</button>\n`
-                 + `</div>\n`;   
-    cardStyle.innerHTML = mkHTML;
-    console.log(mkHTML);
-    console.log("good");
-    console.log(this.taskValue);
-  } 
-}
-
-  subBtn.addEventListener('click', displayThis);
-    function displayThis() {
-    const myCard = new Card(aName.value, cars.value, "in-progress", "12 December, 2002", "Learn React");
-    myCard.setDisplay();
-  }
-
-form.addEventListener("submit", (event) => {
-  validateForm();
-  console.log(inputValue.value);
-  const ourCard = new Card(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value, 1);
-  Card.addTask(ourCard);
-  console.log(ourCard);
+submitBtn.addEventListener("click", (event) => {
+  //event.preventDefault();
+    validateForm();
   if (isFormValid() == true) {
-    form.submit();
+    const taskss = new Task(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value);
+    console.log(taskss)
+    Task.addTask(taskss);
   } else {
     event.preventDefault();
+    
   }
 });
 
@@ -71,7 +43,38 @@ function isFormValid() {
   });
   return result;
 }
-
+class Task {
+  constructor(task, asign, status, date, desc) {
+    this.task = task;
+    this.asign = asign;
+    this.status =status;
+    this.date = date;
+    this.desc = desc;
+    
+  }
+  static addTask(taskList) {
+      
+      const taskDetail =document.getElementById("taskDetail")
+      const cardLi = document.createElement("ul");
+      cardLi.classList.add("list")
+      cardLi.innerHTML = 
+       `<div class="col">
+       <div class="card h-100 bg-warning">
+         <div class="card-body" >
+         <h5 class="card-title border-bottom">Task Name<br>${taskList.task}</h5>
+         <p> <span class="fw-bold">Due Date:</span> ${taskList.date} </p>
+         <p><span class="fw-bold">Asigned To:</span>${taskList.asign}</p>
+         <p><span class="fw-bold">Status:</span>${taskList.status}</p>
+         <p><span class="fw-bold">Description:</span>${taskList.desc}</p>
+         <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#html-css">View Task</button>
+        </div>
+     </div>
+     </div>
+       
+      `
+       taskDetail.appendChild(cardLi)
+    }
+}
 function validateForm() {
   //Task Name
   if (inputValue.value.trim() === "") {
@@ -130,11 +133,3 @@ function setSuccess(element) {
   parent.classList.add("success");
 }
 
-const months = ['January', 'February', "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-let time = document.getElementById('dateNtime')
-let current = new Date();
-//let cDate = `${current.getDate()} / ${(current.getMonth() + 1)} / ${current.getFullYear()}`
-let cDate = `${current.getDate()}  ${months[current.getMonth()]}  ${current.getFullYear()} <br>`
-let cTime = current.getHours() + ":" + current.getMinutes() + ":" + current.getSeconds();
-let dateTime = cDate + ' ' + cTime;
-time.innerHTML = dateTime; 
