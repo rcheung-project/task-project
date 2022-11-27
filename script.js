@@ -27,33 +27,19 @@ function displayTimeDate () {
 setInterval(displayTimeDate, 1000);
 //Code for Time and Date Over
 
-submitBtn.addEventListener("click", (event) => {
-  //event.preventDefault();
-    validateForm();
-  if (isFormValid() == true) {
-    const taskss = new Task(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value);
-    console.log(taskss)
-    Task.addTask(taskss);
-  } else {
-    event.preventDefault();
-    
-  }
-});
 
-function isFormValid() {
-  const inputContainers = document.querySelectorAll(".input-group");
-  let result = true;
-  inputContainers.forEach((container) => {
-    if (container.classList.contains("error")) {
-      result = false;
-    }
-  });
-  return result;
-}
+let taskArr;
+if (taskArr === null) { 
+  taskArr = [];
+} else {
+  taskArr = JSON.parse(localStorage.getItem('taskArr'));  
+};
+
+
 class Task {
-  constructor(task, asign, status, date, desc) {
+  constructor(task, assign, status, date, desc) {
     this.task = task;
-    this.asign = asign;
+    this.assign = assign;
     this.status =status;
     this.date = date;
     this.desc = desc;
@@ -70,7 +56,7 @@ class Task {
          <div class="card-body" >
          <h5 class="card-title border-bottom">Task Name<br>${taskList.task}</h5>
          <p> <span class="fw-bold">Due Date:</span> ${taskList.date} </p>
-         <p><span class="fw-bold">Asigned To:</span>${taskList.asign}</p>
+         <p><span class="fw-bold">Asigned To:</span>${taskList.assign}</p>
          <p><span class="fw-bold">Status:</span>${taskList.status}</p>
          <p><span class="fw-bold">Description:</span>${taskList.desc}</p>
          <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#html-css">View Task</button>
@@ -79,9 +65,67 @@ class Task {
      </div>
        
       `
-       taskDetail.appendChild(cardLi)
+       taskDetail.appendChild(cardLi)       
     }
 }
+
+
+function allTasksDisplay(taskArr) {
+  document.getElementById("taskDetail").innerHTML = "";  
+  taskArr = JSON.parse(localStorage.getItem('taskArr'));  
+    for (let i = 0; i < taskArr.length; i++) {
+      const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc);
+      Task.addTask(taskss);
+    };
+    console.log(taskArr);
+};
+
+function statusIs(taskArr) {
+  document.getElementById("taskDetail").innerHTML = "";
+  taskArr = JSON.parse(localStorage.getItem('taskArr'));  
+  for (let i = 0; i < taskArr.length; i++) {
+      if (taskArr[i].status === "In-Progress") {
+        const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc);
+        Task.addTask(taskss);
+      };
+    };
+  };
+
+allTasksDisplay(taskArr);
+statusIs(taskArr);
+allTasksDisplay(taskArr);
+
+submitBtn.addEventListener("click", (event) => {
+  //event.preventDefault();
+    validateForm();
+  if (isFormValid() == true) {
+    const taskss = new Task(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value);
+    console.log(taskss);
+    Task.addTask(taskss);  
+
+    taskArr.push(taskss);
+    taskArr = localStorage.setItem('taskArr', JSON.stringify(taskArr));
+    taskArr = JSON.parse(localStorage.getItem('taskArr'));  
+
+  } else {
+    event.preventDefault();
+  }    
+});
+
+
+
+
+function isFormValid() {
+  const inputContainers = document.querySelectorAll(".input-group");
+  let result = true;
+  inputContainers.forEach((container) => {
+    if (container.classList.contains("error")) {
+      result = false;
+    }
+  });
+  return result;
+}
+
 function validateForm() {
   //Task Name
   if (inputValue.value.trim() === "") {
@@ -139,4 +183,5 @@ function setSuccess(element) {
   }
   parent.classList.add("success");
 }
+
 
