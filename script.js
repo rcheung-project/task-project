@@ -73,6 +73,9 @@ class Task {
 function allTasksDisplay(taskArr) {
   document.getElementById("taskDetail").innerHTML = "";  
   taskArr = JSON.parse(localStorage.getItem('taskArr'));  
+  if (taskArr === null) {
+    taskArr = [];
+  }
     for (let i = 0; i < taskArr.length; i++) {
       const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc);
       Task.addTask(taskss);
@@ -82,7 +85,11 @@ function allTasksDisplay(taskArr) {
 
 function statusIs(taskArr) {
   document.getElementById("taskDetail").innerHTML = "";
-  taskArr = JSON.parse(localStorage.getItem('taskArr'));  
+  taskArr = JSON.parse(localStorage.getItem('taskArr'));
+  if (taskArr === null) {
+    taskArr = [];
+    
+  } else {
   for (let i = 0; i < taskArr.length; i++) {
       if (taskArr[i].status === "In-Progress") {
         const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc);
@@ -90,10 +97,11 @@ function statusIs(taskArr) {
       };
     };
   };
+};
 
 allTasksDisplay(taskArr);
 statusIs(taskArr);
-allTasksDisplay(taskArr);
+
 
 submitBtn.addEventListener("click", (event) => {
   //event.preventDefault();
@@ -102,7 +110,9 @@ submitBtn.addEventListener("click", (event) => {
     const taskss = new Task(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value);
     console.log(taskss);
     Task.addTask(taskss);  
-
+    if (taskArr === null) {
+      taskArr = [];
+    }
     taskArr.push(taskss);
     taskArr = localStorage.setItem('taskArr', JSON.stringify(taskArr));
     taskArr = JSON.parse(localStorage.getItem('taskArr'));  
