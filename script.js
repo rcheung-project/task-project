@@ -72,12 +72,12 @@ class Task {
     }
 }
 
-
-function allTasksDisplay(taskArr) {
+// function to get all tasks
+function getAllTasks(taskArr) {
   document.getElementById("taskDetail").innerHTML = "";  
   taskArr = JSON.parse(localStorage.getItem('taskArr'));  
   if (taskArr === null) {
-    taskArr = [];
+    taskArr = [];        
   }
     for (let i = 0; i < taskArr.length; i++) {
       const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc, taskArr[i].id);
@@ -86,25 +86,25 @@ function allTasksDisplay(taskArr) {
     console.log(taskArr);
 };
 
-function statusIs(taskArr) {
+// function to filter tasks by status
+function getTasksWithStatus(taskArr, option) {
   document.getElementById("taskDetail").innerHTML = "";
   taskArr = JSON.parse(localStorage.getItem('taskArr'));
   if (taskArr === null) {
-    taskArr = [];
-    
-  } else {
+    taskArr = [];    
+  } 
   for (let i = 0; i < taskArr.length; i++) {
-      if (taskArr[i].status === "In-Progress") {
+    if (option === "All-Status") {
+      console.log(taskArr[i].status);
+      getAllTasks(taskArr);
+    } else if (taskArr[i].status === option) {
         const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc, taskArr[i].id);
         Task.addTask(taskss);
-      };
-    };
-  };
+      };             
+ };
 };
 
-allTasksDisplay(taskArr);
-statusIs(taskArr);
-
+getAllTasks(taskArr);
 
 submitBtn.addEventListener("click", (event) => {
   //event.preventDefault();
@@ -125,6 +125,30 @@ submitBtn.addEventListener("click", (event) => {
   }    
 });
 
+// To filter all tasks by status
+const filterStatus = document.getElementById('statusValueFiltered');
+let option;
+filterStatus.addEventListener("click", function() {
+  let sthing = statusValueFiltered.value;
+  switch(sthing) {
+  case "Started":
+    option = "Started";
+    break;
+  case "In-Progress":
+    option = "In-Progress";
+    break;
+  case "Review":
+    option = "Review";
+    break;
+  case "Finished":
+    option = "Finished";
+    break;
+  case "All-Status":
+    option = "All-Status";
+    break;
+  }
+  getTasksWithStatus(taskArr, option);
+});
 
 
 

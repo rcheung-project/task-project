@@ -16,7 +16,7 @@
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
       crossorigin="anonymous"
     ></script>
-
+ 
     <!-- Google fonts-->
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
@@ -135,6 +135,19 @@
       </div>
     </div>
     
+<!-- Filter status to display tasks-->
+<div class="input-group">
+  <label for="statusValueFiltered">Status</label>
+  <select id="statusValueFiltered" name="statusValueFiltered">
+    <option value="">Status</option>
+    <option value="Started">Started</option>
+    <option value="In-Progress">In-Progress</option>
+    <option value="Review">Review</option>
+    <option value="Finished">Finished</option>
+    <option value="All-Status">All-Status</option>
+  </select>
+</div>
+
 <!--Card Section-->
 
 <div class="container bg-light py-4 mt-5 " id="task-card" >
