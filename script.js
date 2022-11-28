@@ -59,7 +59,7 @@ class Task {
          <p><span class="fw-bold">Asigned To:</span>${taskList.assign}</p>
          <p><span class="fw-bold">Status:</span>${taskList.status}</p>
          <p><span class="fw-bold">Description:</span>${taskList.desc}</p>
-         <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#html-css">View Task</button>
+         <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" >Delete</button>
         </div>
      </div>
      </div>
