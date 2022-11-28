@@ -9,6 +9,7 @@ const statusValue = document.getElementById("statusValue");
 const dateValue = document.getElementById("dateValue");
 const descValue = document.getElementById("descValue");
 const submitBtn = document.getElementById("submitBtn")
+const prevDateDisabled = document.getElementsByName("dateValue")
 
 //Code for Time and Date
 const months = ['January', 'February', "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
@@ -24,6 +25,8 @@ function displayTimeDate () {
   let dateTime = cDate + ' ' + cTime;
   time.innerHTML = dateTime; 
 }
+let today = new Date().toISOString().split('T')[0];
+prevDateDisabled[0].setAttribute('min', today);
 setInterval(displayTimeDate, 1000);
 //Code for Time and Date Over
 //id variable//
@@ -70,6 +73,15 @@ class Task {
     id = taskList.id;
     id++
     }
+  static clearFields() {
+      inputValue.value = "";
+      assignValue.value = "";
+      statusValue.value = "";
+      descValue.value = "";
+      dateValue.value = "";
+      submitBtn.value = "";
+     
+   }
 }
 
 // function to get all tasks
@@ -119,7 +131,8 @@ submitBtn.addEventListener("click", (event) => {
     taskArr.push(taskss);
     taskArr = localStorage.setItem('taskArr', JSON.stringify(taskArr));
     taskArr = JSON.parse(localStorage.getItem('taskArr'));  
-
+    
+    Task.clearFields()
   } else {
     event.preventDefault();
   }    
@@ -218,7 +231,7 @@ function setSuccess(element) {
   if (parent.classList.contains("error")) {
     parent.classList.remove("error");
   }
-  parent.classList.add("success");
+ 
 }
 
 
