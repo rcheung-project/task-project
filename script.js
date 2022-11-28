@@ -26,8 +26,8 @@ function displayTimeDate () {
 }
 setInterval(displayTimeDate, 1000);
 //Code for Time and Date Over
-
-
+//id variable//
+let id = 1
 let taskArr;
 if (taskArr === null) { 
   taskArr = [];
@@ -37,12 +37,13 @@ if (taskArr === null) {
 
 
 class Task {
-  constructor(task, assign, status, date, desc) {
+  constructor(task, assign, status, date, desc,id) {
     this.task = task;
     this.assign = assign;
     this.status =status;
     this.date = date;
     this.desc = desc;
+    this.id = id;
     
   }
   static addTask(taskList) {
@@ -59,13 +60,15 @@ class Task {
          <p><span class="fw-bold">Asigned To:</span>${taskList.assign}</p>
          <p><span class="fw-bold">Status:</span>${taskList.status}</p>
          <p><span class="fw-bold">Description:</span>${taskList.desc}</p>
-         <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" data-bs-target="#html-css">View Task</button>
+         <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" >Delete</button>
         </div>
      </div>
      </div>
        
       `
-       taskDetail.appendChild(cardLi)       
+       taskDetail.appendChild(cardLi);
+    id = taskList.id;
+    id++
     }
 }
 
@@ -77,7 +80,7 @@ function allTasksDisplay(taskArr) {
     taskArr = [];
   }
     for (let i = 0; i < taskArr.length; i++) {
-      const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc);
+      const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc, taskArr[i].id);
       Task.addTask(taskss);
     };
     console.log(taskArr);
@@ -92,7 +95,7 @@ function statusIs(taskArr) {
   } else {
   for (let i = 0; i < taskArr.length; i++) {
       if (taskArr[i].status === "In-Progress") {
-        const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc);
+        const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc, taskArr[i].id);
         Task.addTask(taskss);
       };
     };
@@ -107,7 +110,7 @@ submitBtn.addEventListener("click", (event) => {
   //event.preventDefault();
     validateForm();
   if (isFormValid() == true) {
-    const taskss = new Task(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value);
+    const taskss = new Task(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value,id);
     console.log(taskss);
     Task.addTask(taskss);  
     if (taskArr === null) {
