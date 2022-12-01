@@ -169,7 +169,7 @@ class Task {
 }
 
 //new Task instance
-const taskClass = new Task(0);
+const taskClass = new Task(1);
 taskClass.getPage();
 taskClass.displayPage();
 
