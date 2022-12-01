@@ -143,7 +143,55 @@ submitBtn.addEventListener("click", (event) => {
     event.preventDefault();
   }
 });
-/// valid form after all field filled true or false
+
+// function to filter tasks by status
+function getTasksWithStatus(option) {
+  document.getElementById("task-card").innerHTML = "";
+  taskArr = JSON.parse(localStorage.getItem('task'));
+  if (taskArr === null) {
+    taskArr = [];    
+  } 
+  for (let i = 0; i < taskArr.length; i++) {
+    if (option === "ALL-STATUS") {
+      taskClass.displayPage();                      
+    } else if (option === taskArr[i].status) {
+        const taskHtml = createBootstrap(taskArr[i].id, taskArr[i].taskName, taskArr[i].assign, taskArr[i].date, taskArr[i].status, taskArr[i].description);
+        taskArr.push(taskHtml);
+        const tasksHtml = taskArr.join('\n');
+        const taskList = document.querySelector('#task-card');
+        taskList.innerHTML = tasksHtml;  
+        };
+      };             
+ };
+
+
+// function to choose a status for filtering the display of task cards
+
+const filterStatus = document.getElementById('statusValueFiltered');
+let option;
+filterStatus.addEventListener("click", function() {
+  let sthing = statusValueFiltered.value;
+  switch(sthing) {
+  case "STARTED":
+    option = "STARTED";
+    break;
+  case "IN-PROGRESS":
+    option = "IN-PROGRESS";
+    break;
+  case "REVIEWED":
+    option = "REVIEWED";
+    break;
+  case "DONE":
+    option = "DONE";
+    break;
+  case "ALL-STATUS":
+    option = "ALL-STATUS";
+    break;
+  }
+  getTasksWithStatus(option);
+});
+
+// valid form after all field filled true or false
 function isFormValid() {
   const inputContainers = document.querySelectorAll(".input-group");
   let result = true;
@@ -235,31 +283,3 @@ taskCard.addEventListener("click", (event) => {
     taskClass.displayPage();
   }
 });
-
-// function to get all tasks
-/*
- const filterStatus = document.getElementById('statusValueFiltered');
-let option;
-filterStatus.addEventListener("click", function() {
-  let sthing = statusValueFiltered.value;
-  switch(sthing) {
-  case "Started":
-    option = "Started";
-    break;
-  case "In-Progress":
-    option = "In-Progress";
-    break;
-  case "Review":
-    option = "Review";
-    break;
-  case "Finished":
-    option = "Finished";
-    break;
-  case "All-Status":
-    option = "All-Status";
-    break;
-  }
-  getTasksWithStatus(this.taskArr, option);
-});
-
-*/
