@@ -155,7 +155,7 @@ function getTasksWithStatus(option) {
     if (option === "ALL-STATUS") {
       taskClass.displayPage();                      
     } else if (option === taskArr[i].status) {
-        const taskHtml = createBootstrap(taskArr[i].id, taskArr[i].taskName, taskArr[i].assign, taskArr[i].date, taskArr[i].status, taskArr[i].description);
+        const taskHtml = createBootstrap(taskArr[i].id, taskArr[i].taskName, taskArr[i].assign, taskArr[i].date, taskArr[i].status, taskArr[i].desc);
         taskArr.push(taskHtml);
         const tasksHtml = taskArr.join('\n');
         const taskList = document.querySelector('#task-card');
