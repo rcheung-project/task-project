@@ -64,6 +64,18 @@ class Task {
     dateValue.value = "";
     submitBtn.value = "";
   }
+  //delete Task 
+  removeTask(taskId) {
+    const newObj = [];
+    for (let i = 0; i < this.taskArr.length; i++) {
+      const task = this.taskArr[i];
+      if (task.id !== taskId) {
+        newObj.push(task);
+      }
+    }
+    this.taskArr = newObj;
+    console.log(this.taskArr);
+  }
 
 
   //getting task from array 
@@ -278,6 +290,7 @@ taskCard.addEventListener("click", (event) => {
     const parentTask = event.target.parentElement.parentElement;
     console.log(parentTask);
     const taskId = Number(parentTask.dataset.taskId);
+    taskClass.removeTask(taskId);
     //console.log(taskId);
     taskClass.saveToLstorage();
     taskClass.displayPage();
