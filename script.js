@@ -1,170 +1,149 @@
-//Form Validation
-
-//Variable Target///
-
 //const form = document.querySelector("#form");
 const inputValue = document.getElementById("InputValue");
 const assignValue = document.getElementById("assignValue");
 const statusValue = document.getElementById("statusValue");
 const dateValue = document.getElementById("dateValue");
 const descValue = document.getElementById("descValue");
-const submitBtn = document.getElementById("submitBtn")
-const prevDateDisabled = document.getElementsByName("dateValue")
+const submitBtn = document.getElementById("submitBtn");
 
-//Code for Time and Date
-const months = ['January', 'February', "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-let time = document.getElementById('dateNtime') //There is a span tag for time displayed
-function addZero(i) {  //To add zero before single digits when needed
-  if (i < 10) {i = "0" + i}
-  return i;
-}
-function displayTimeDate () {
-  let current = new Date();
-  let cDate = `${current.getDate()}  ${months[current.getMonth()]}  ${current.getFullYear()} <br>`
-  let cTime = addZero(current.getHours()) + ":" + addZero(current.getMinutes()) + ":" + addZero(current.getSeconds());
-  let dateTime = cDate + ' ' + cTime;
-  time.innerHTML = dateTime; 
-}
-let today = new Date().toISOString().split('T')[0];
-prevDateDisabled[0].setAttribute('min', today);
-setInterval(displayTimeDate, 1000);
-//Code for Time and Date Over
-//id variable//
-let id = 1
-let taskArr;
-if (taskArr === null) { 
-  taskArr = [];
-} else {
-  taskArr = JSON.parse(localStorage.getItem('taskArr'));  
+//create Bootstrap html//
+const createBootstrap = (id, taskName, assign, date, status, desc) => {
+  return `   
+      <div class="card card-body bg-warning mx-5" data-task-id=${id} >
+     <div class="d-flex  mt-2 justify-content-between align-items-center">
+         <h5>${taskName}</h5>
+         <span class=" ${
+           status === "STARTED"
+             ? "text-danger"
+             : status === "IN-PROGRESS"
+             ? "text-primary"
+             : status === "REVIEWED"
+             ? "text-info"
+             : "text-success"
+         } fw-bold fs-6">${status}</span>
+     </div>
+     <div class="d-flex  mb-3 justify-content-between">
+         <small>Assigned To: ${assign}</small>
+         <small><span class="fw-bold">Due Date:</span> ${date}</small>
+      </div>
+     <p  ><span class="fw-bold">Description:</span> ${desc}</p>
+     <div class="d-flex w-100 justify-content-end btns">
+         <button class="btn-background bg-success text-white mx-5 btn btn-outline-success done-button mr-1 ${
+           status === "DONE" ? "invisible" : "visible"
+         }">Mark As Done</button>
+         <button class="btn-background bg-danger text-white mx-5 btn btn-outline-danger delete-button">Delete</button>
+     </div>
+     </div>
+`;
 };
 
-
+//Task Constructor Class//
 class Task {
-  constructor(task, assign, status, date, desc,id) {
-    this.task = task;
-    this.assign = assign;
-    this.status =status;
-    this.date = date;
-    this.desc = desc;
-    this.id = id;
-    
+  constructor(Id = 0) {
+    this.taskArr = [];
+    this.Id = Id;
   }
-  static addTask(taskList) {
-      
-      const taskDetail =document.getElementById("taskDetail")
-      const cardLi = document.createElement("ul");
-      cardLi.classList.add("list")
-      cardLi.innerHTML = 
-       `<div class="col">
-       <div class="card h-100 bg-warning">
-         <div class="card-body" >
-         <h5 class="card-title border-bottom">Task Name<br>${taskList.task}</h5>
-         <p> <span class="fw-bold">Due Date:</span> ${taskList.date} </p>
-         <p><span class="fw-bold">Asigned To:</span>${taskList.assign}</p>
-         <p><span class="fw-bold">Status:</span>${taskList.status}</p>
-         <p><span class="fw-bold">Description:</span>${taskList.desc}</p>
-         <button class="bg-secondary border-0 text-white p-2 rounded" data-bs-toggle="modal" >Delete</button>
-        </div>
-     </div>
-     </div>
-       
-      `
-       taskDetail.appendChild(cardLi);
-    id = taskList.id;
-    id++
+  //add task
+  addTask(taskName, assign, date, status, desc) {
+    const newTask = {
+      id: this.Id++,
+      taskName: taskName,
+      assign: assign,
+      date: date,
+      status: status,
+      desc: desc,
+    };
+    this.taskArr.push(newTask);
+  }
+  //clear field after task submit
+  clearFields() {
+    inputValue.value = "";
+    assignValue.value = "";
+    statusValue.value = "";
+    descValue.value = "";
+    dateValue.value = "";
+    submitBtn.value = "";
+  }
+
+
+  //getting task from array 
+  getTask(taskId) {
+    let getTask;
+    for (let i = 0; i < this.taskArr.length; i++) {
+      const task = this.taskArr[i];
+      if (task.id === taskId) {
+        getTask = task;
+      }
     }
-  static clearFields() {
-      inputValue.value = "";
-      assignValue.value = "";
-      statusValue.value = "";
-      descValue.value = "";
-      dateValue.value = "";
-      submitBtn.value = "";
-     
-   }
+    return getTask;
+  }
+//saving to local storage
+  saveToLstorage() {
+    const taskStingify = JSON.stringify(this.taskArr);
+    // console.log(taskStingify);
+    localStorage.setItem("task", taskStingify);
+    const Id = String(this.Id);
+    localStorage.setItem("Id", Id);
+  }
+  //get data from localstorage  after refresh or browser closed
+  getPage() {
+    if (localStorage.getItem("task")) {
+      const getData = localStorage.getItem("task");
+      // console.log(getData);
+      this.taskArr = JSON.parse(getData);
+      console.log(this.taskArr);
+    }
+     if (localStorage.getItem("Id")) {
+      const Id = localStorage.getItem("Id");
+      this.Id = Number(Id);
+    }
+  }
+  // display task card 
+  displayPage() {
+    const htmlList = [];
+    for (let i = 0; i < this.taskArr.length; i++) {
+      const tasks = this.taskArr[i];
+      const taskHtml = createBootstrap(
+        tasks.id,
+        tasks.taskName,
+        tasks.assign,
+        tasks.date,
+        tasks.status,
+        tasks.desc
+      );
+      htmlList.push(taskHtml);
+    }
+    const tasksHtml = htmlList.join("\n");
+    const taskList = document.querySelector("#task-card");
+    taskList.innerHTML = tasksHtml;
+  }
 }
 
-// function to get all tasks
-function getAllTasks(taskArr) {
-  document.getElementById("taskDetail").innerHTML = "";  
-  taskArr = JSON.parse(localStorage.getItem('taskArr'));  
-  if (taskArr === null) {
-    taskArr = [];        
-  }
-    for (let i = 0; i < taskArr.length; i++) {
-      const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc, taskArr[i].id);
-      Task.addTask(taskss);
-    };
-    console.log(taskArr);
-};
+//new Task instance
+const taskClass = new Task(0);
+taskClass.getPage();
+taskClass.displayPage();
 
-// function to filter tasks by status
-function getTasksWithStatus(taskArr, option) {
-  document.getElementById("taskDetail").innerHTML = "";
-  taskArr = JSON.parse(localStorage.getItem('taskArr'));
-  if (taskArr === null) {
-    taskArr = [];    
-  } 
-  for (let i = 0; i < taskArr.length; i++) {
-    if (option === "All-Status") {
-      console.log(taskArr[i].status);
-      getAllTasks(taskArr);
-    } else if (taskArr[i].status === option) {
-        const taskss = new Task(taskArr[i].task, taskArr[i].assign, taskArr[i].status, taskArr[i].date, taskArr[i].desc, taskArr[i].id);
-        Task.addTask(taskss);
-      };             
- };
-};
-
-getAllTasks(taskArr);
-
+//event listner for form
 submitBtn.addEventListener("click", (event) => {
   //event.preventDefault();
-    validateForm();
+  validateForm();
   if (isFormValid() == true) {
-    const taskss = new Task(inputValue.value, assignValue.value, statusValue.value, dateValue.value, descValue.value,id);
-    console.log(taskss);
-    Task.addTask(taskss);  
-    if (taskArr === null) {
-      taskArr = [];
-    }
-    taskArr.push(taskss);
-    taskArr = localStorage.setItem('taskArr', JSON.stringify(taskArr));
-    taskArr = JSON.parse(localStorage.getItem('taskArr'));  
-    
-    Task.clearFields()
+    taskClass.addTask(
+      inputValue.value,
+      assignValue.value,
+      dateValue.value,
+      statusValue.value,
+      descValue.value
+    );
+    taskClass.clearFields();
+    taskClass.saveToLstorage();
+    taskClass.displayPage();
   } else {
     event.preventDefault();
-  }    
-});
-
-// To filter all tasks by status
-const filterStatus = document.getElementById('statusValueFiltered');
-let option;
-filterStatus.addEventListener("click", function() {
-  let sthing = statusValueFiltered.value;
-  switch(sthing) {
-  case "Started":
-    option = "Started";
-    break;
-  case "In-Progress":
-    option = "In-Progress";
-    break;
-  case "Review":
-    option = "Review";
-    break;
-  case "Finished":
-    option = "Finished";
-    break;
-  case "All-Status":
-    option = "All-Status";
-    break;
   }
-  getTasksWithStatus(taskArr, option);
 });
-
-
-
+/// valid form after all field filled true or false
 function isFormValid() {
   const inputContainers = document.querySelectorAll(".input-group");
   let result = true;
@@ -175,7 +154,7 @@ function isFormValid() {
   });
   return result;
 }
-
+//Form validation
 function validateForm() {
   //Task Name
   if (inputValue.value.trim() === "") {
@@ -216,6 +195,7 @@ function validateForm() {
   }
 }
 
+//setting error and success message
 function setError(element, errorMessage) {
   const parent = element.parentElement;
   if (parent.classList.contains("success")) {
@@ -231,7 +211,55 @@ function setSuccess(element) {
   if (parent.classList.contains("error")) {
     parent.classList.remove("error");
   }
- 
 }
+//Toggling Mark as done button
+const taskCard = document.querySelector("#task-card");
+taskCard.addEventListener("click", (event) => {
+  if (event.target.classList.contains("done-button")) {
+    const button = event.target;
+    const parentTask = button.parentElement.parentElement;
+    console.log(parentTask);
+    const taskId = Number(parentTask.dataset.taskId);
+    const task = taskClass.getTask(taskId);
+    task.status = "DONE";
+    taskClass.saveToLstorage();
+    taskClass.displayPage();
+  }
+  //Toggling delete button
+  if (event.target.classList.contains("delete-button")) {
+    const parentTask = event.target.parentElement.parentElement;
+    console.log(parentTask);
+    const taskId = Number(parentTask.dataset.taskId);
+    //console.log(taskId);
+    taskClass.saveToLstorage();
+    taskClass.displayPage();
+  }
+});
 
+// function to get all tasks
+/*
+ const filterStatus = document.getElementById('statusValueFiltered');
+let option;
+filterStatus.addEventListener("click", function() {
+  let sthing = statusValueFiltered.value;
+  switch(sthing) {
+  case "Started":
+    option = "Started";
+    break;
+  case "In-Progress":
+    option = "In-Progress";
+    break;
+  case "Review":
+    option = "Review";
+    break;
+  case "Finished":
+    option = "Finished";
+    break;
+  case "All-Status":
+    option = "All-Status";
+    break;
+  }
+  getTasksWithStatus(this.taskArr, option);
+});
 
+*/
