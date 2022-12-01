@@ -32,130 +32,120 @@
   </head>
   <body>
      <!--Navigation-->
-     <nav class="navbar navbar-expand-lg navbar-light bg-secondary sticky-top" id="mainNav" >
-      <div class="container px-4 px-lg-5 ">
-         <a class="navbar-brand text-white fw-bold">CodeDen</a>
-        <button
-          class="navbar-toggler text-white"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarResponsive"
-          aria-controls="navbarResponsive"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          Menu
-          <i class="fas fa-bars text-white"></i>
-        </button>
-      </div>
-    </nav>
+      <div class="tab-bottom" >
+        <div class=" ">
+             <h5 class="  text-white"><span class="date-time"></span></h5>
+         </div>
+             <div class=" ">
+               <h5 class="text-white"><span class="time"></span> </h5>
+             </div>
+               <div class="">
+                 <button type="button"  id="add-task-btn" data-bs-toggle="modal" data-bs-target="#add-task" onclick="themeFunction()" >
+                   DAY/NIGHT</button>
+              
+             </div>
+          </div>
     <!--nav-end-->
 
 
 <!-- jumbotron-->
-<div class="container-fluid jumbotron">
+<div class="container-fluid jumbotron ">
 <div class="jumbotron-fluid">
   <div class="lead">
-    <h2 class=" text-center text-white fw-bold fs-9 fst-italic " style="letter-spacing:2px ;"> ““We acknowledge the Traditional Custodians of the land We pay our respects to Elders past and present, and extend that respect to all First Nations people present today.””</h2>
+    <h2 class=" text-center  " style="letter-spacing:2px ;"> ““We acknowledge the Traditional Custodians of the land We pay our respects to Elders past and present.””</h2>
   </div>
   </div>
 </div>
 
     <!--Form input-->
-    <div class="container py-5 ">
-      <div class="row ">
-        <div class="col-lg-6 mx-auto " >
-          <div class="card shadow-lg" >
-            <div class="card-body">
-              <h5 class="card-title text-center mb-5 fs-9 bg-secondary text-white py-5">Tasks Form<br>
-              <span id="dateNtime"></span></h5>
-              <form id="form" action="#task-card" method="GET" >
+    <section id="tasks">
+    <div class="container mt-1 ">   
+        <h1 class="text-center mb-5">TASK FORM</h1>  
+              <form id="form" class="row g-3">
                  <!--Input Task-->
-                <div class="input-group">
-                  <label for="inputValue">Task Name </label>
+                <div class="col-md-4 input-group">
                   <input
+                     class="form-control"
                       id="InputValue"
                       type="text"
-                      placeholder="Task Name"
+                      placeholder="TASK NAME"
                       name="InputValue"
                     />
+                    <br>
                     <p>Error message</p>
                 </div>
                 <!--Input assigned-->
-                <div class="input-group">
-                  <label for="assignValue">Assign To</label>
-                  <select id="assignValue" name="assignValue">
-                    <option value="">Assigned To</option>
-                    <option value="Maria">Maria</option>
-                    <option value="Riki">Riki</option>
-                    <option value="Shahan">Shahan</option>
-                    <option value="Ben">Ben</option>
-                  </select>
-                  <p>Error Message</p>
-                </div>
-                <!--Input Status-->
-                <div class="input-group">
-                  <label for="statusValue">Status</label>
-                  <select id="statusValue" name="statusValue">
-                    <option value="">Status</option>
-                    <option value="Started">Started</option>
-                    <option value="In-Progress">In-Progress</option>
-                    <option value="Review">Review</option>
-                    <option value="Finished">Finished</option>
-                  </select>
-                  <p>Error Message</p>
-                </div>
-                <div class="col-lg-8 mx-auto mt-5 text-dark input-group">
-                  <label for="dateValue">Due Date :</label>
-                 <input id="dateValue" type="date" name="dateValue"/>
+                <div class="col-md-4 input-group">
+                 <input class="form-control" type="text" id="assignValue" name="assignValue"  placeholder="ASSIGNED TO">
+                 <br>
                  <p>Error Message</p>
                 </div>
-                 <!--Due Date-->
-                <div class="input-group">
-                  <label for="descValue">Description </label>
-                  <textarea id="descValue" name="descValue" rows="4" cols="50"></textarea>
+                <!--Input Status-->
+                <div class="col-md-4 input-group">
+                  <select  class="form-select" id="statusValue" name="statusValue" >
+                    <option value="">SELECT STATUS</option>
+                    <option value="STARTED">STARTED</option>
+                    <option value="IN-PROGRESS">IN-PROGRESS</option>
+                    <option value="REVIEWED">REVIEWED</option>
+                    <option value="DONE">DONE</option>
+                  </select>
+                  <br>
                   <p>Error Message</p>
                 </div>
-                
-                <button type="Button" id="submitBtn" class="btn btn-warning">Submit</button>
-                <input type="reset"  id="resetBtn"class="btn btn-warning ms-5" >
+                 <!--Due Date-->
+                <div class="col-md-2  input-group" class="date">
+                  <label class="form-label" for="dateValue"><strong>DUE DATE: </strong> :</label>
+                 <input id="dateValue" type="date" name="dateValue"/>
+                 <br>
+                 <p>Error Message</p>
+                </div>
+                 <!--Desc-->
+                <div class=" col-md-4 input-group">
+                  <textarea class="form-control"  id="descValue" name="descValue" rows="4" cols="50" placeholder="DESCRIPTION"></textarea>
+                  <br>
+                  <p>Error Message</p>
+                </div>
+                <div class ="col-md-4"></div>
+                <div class ="col-md-4 button-col">
+                  <button id="submitBtn" type="submit" class="btn btn-warning mb-5 mx-5"><i class="fa-solid fa-plus"></i><a href="#task-container">ADD Task</a></button></div>
+                <div class ="col-md-4"></div>
               </form>
-          
-             
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+           </div>
+          </section>
     
-<!-- Filter status to display tasks-->
+<!-- Filter status to display tasks
 <div class="input-group">
   <label for="statusValueFiltered">Status</label>
   <select id="statusValueFiltered" name="statusValueFiltered">
-    <option value="">Status</option>
-    <option value="Started">Started</option>
-    <option value="In-Progress">In-Progress</option>
-    <option value="Review">Review</option>
-    <option value="Finished">Finished</option>
-    <option value="All-Status">All-Status</option>
+    <option value="STARTED">STARTED</option>
+    <option value="In-Progress">IN-PROGRESS</option>
+    <option value="REVIEWED">REVIEWED</option>
+    <option value="DONE">DONE</option>
+    <option value="All-Status">All-STATUS</option>
   </select>
 </div>
-
-<!--Card Section-->
-
-<div class="container bg-light py-4 mt-5 " id="task-card" >
+<div>
+-->
+<div class="container bg-light py-4 mt-5 " id="task-container" >
   <h2 class="text-center mb-5">Task Details</h2>
-<div class="row row-cols-1 row-cols-md-3 g-4" id="taskDetail">
+<div class="row row-cols-1 row-cols-md-3 g-4" id="task-card">
       </div>
     </div>
 
+    <!--parralex-->
+    <div class="parralex">
+      <div class="quotes">
+        <h5>Success is the result of perfection, hard work, learning from failure, loyalty, and persistence-Colin Powell</h5>
+      </div>
+    </div> 
+       
 <!--our Team-->
-<section class="team py-5" id="team" >
-  <div class="container-lg py-4">
+<section class="team" id="team" >
+  <div class="container ">
       <div class="row justify-content-center">
           <div class="c0l-lg-8">
               <div class="section-title text-center">
-                  <h2 class="fw-b mb-4">Our Team</h2>
+                  <h2 class="fw-b mb-4 text-white bg-secondary py-3 px-5">Our Team</h2>
               </div>
               
            </div>
@@ -229,7 +219,7 @@
 <!---->
 
  
-<footer class="py-3 text-center bg-secondary">
+<footer class="py-3 text-center bg-secondary text-white">
     <p>Copy Right @ CodeDen</p>
 </footer>
    
@@ -244,5 +234,6 @@
       crossorigin="anonymous"
     ></script>
     <script src="./script.js"></script>
+    <script src="./dateNtime.js"></script>
   </body>
 </html>
