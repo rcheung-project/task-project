@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -32,7 +32,7 @@
   </head>
   <body>
      <!--Navigation-->
-      <div class="tab-bottom" >
+      <div class="container-fluid"  id="top" >
         <div class=" ">
              <h5 class="  text-white"><span class="date-time"></span></h5>
          </div>
@@ -49,7 +49,7 @@
 
 
 <!-- jumbotron-->
-<div class="container-fluid jumbotron ">
+<div class="container-fluid jumbotron " id="banner">
 <div class="jumbotron-fluid">
   <div class="lead">
     <h2 class=" text-center  " style="letter-spacing:2px ;"> ““We acknowledge the Traditional Custodians of the land We pay our respects to Elders past and present.””</h2>
@@ -94,8 +94,8 @@
                 </div>
                  <!--Due Date-->
                 <div class="col-md-2  input-group" class="date">
-                  <label class="form-label" for="dateValue"><strong>DUE DATE: </strong> :</label>
-                 <input id="dateValue" type="date" name="dateValue"/>
+                  <label  class="form-label" for="dateValue"><strong>DATE:</strong></label>
+                 <input class="form-control" id="dateValue" type="date" name="dateValue"/>
                  <br>
                  <p>Error Message</p>
                 </div>
@@ -108,33 +108,36 @@
                 <div class ="col-md-4"></div>
                 <div class ="col-md-4 button-col">
                   <button id="submitBtn" type="submit" class="btn btn-warning mb-5 mx-5"><i class="fa-solid fa-plus"></i><a href="#task-container">ADD Task</a></button></div>
-                <div class ="col-md-4"></div>
+                 
+                  <div class ="col-md-4">
+                     <button id="reloadBtn" type="button" class="btn btn-warning mb-5 mx-5"><i class='fa fa-refresh'></i><a href="#">Reload</a>
+                    </button></div></div>
               </form>
            </div>
           </section>
     
-<!-- Filter status to display tasks -->
-<div>
-  <label for="statusValueFiltered"><h5 style="color: purple;">Filter by task status</h5></label>
-  <select id="statusValueFiltered" name="statusValueFiltered">
-    <option value="">Status</option>  
-    <option value="STARTED">Started</option>
-    <option value="IN-PROGRESS">In-Progress</option>
-    <option value="REVIEWED">Review</option>
-    <option value="DONE">Done</option>
-    <option value="ALL-STATUS">All-Status</option>
-  </select>
-</div>
 
-
+<!--  display tasks -->
 <div class="container bg-light py-4 mt-5 " id="task-container" >
-  <h2 class="text-center mb-5">Task Details</h2>
+  <!-- Filter status to display tasks -->
+  <div>
+  <label for="statusValueFiltered"><h6 >Search Status</h6></label>
+   <select id="statusValueFiltered" name="statusValueFiltered" class="bg-warning">
+     <option value="ALL-STATUS">All-Status</option>
+     <option value="STARTED">Started</option>
+     <option value="IN-PROGRESS">In-Progress</option>
+     <option value="REVIEWED">Review</option>
+     <option value="DONE">Done</option>
+   </select>
+ </div>
+  <h2 class="text-center mb-5  text-dark">Task Details</h2>
 <div class="row row-cols-1 row-cols-md-3 g-4" id="task-card">
       </div>
+      <a class="to-form btn bg-secondary p-2 text-white" href="#banner"><i class="arrow text-primary mx-2  fa fa-arrow-up" aria-hidden="true"></i>To Form</a>
     </div>
 
     <!--parralex-->
-    <div class="parralex">
+    <div class="container-fluid parralex">
       <div class="quotes">
         <h5>Success is the result of perfection, hard work, learning from failure, loyalty, and persistence-Colin Powell</h5>
       </div>
@@ -144,7 +147,7 @@
 <section class="team" id="team" >
   <div class="container ">
       <div class="row justify-content-center">
-          <div class="c0l-lg-8">
+          <div class="col-lg-7">
               <div class="section-title text-center">
                   <h2 class="fw-b mb-4 text-white bg-secondary py-3 px-5">Our Team</h2>
               </div>
@@ -162,7 +165,7 @@
               <div class="carousel-inner p-1">
               <div class=" carousel-item active bg-white shadow-lg rounded p-4 mb-5">
                   <div class="testi-author-info d-flex align-items-center">
-                      <img src="./images/port2.png"  alt="info" width="304" height="236">
+                      <img src='./images/port2.png'  alt="info" width="304" height="236">
                       <div class="author ms-3">
                           <h3 class="fs-6 mb-1">Shahan Ahmad</h3>
                           <p class="text-muted m-0">Junior Front-end Developer</p>
@@ -179,7 +182,7 @@
               </div>
               <div class=" carousel-item  bg-white shadow-lg rounded p-4 mb-5">
                   <div class="testi-author-info d-flex align-items-center">
-                      <img src="./images/port1.png"  alt="info" width="304" height="236">
+                      <img src='./images/port1.png'  alt="info" width="304" height="236">
                       <div class="author ms-3">
                           <h3 class="fs-6 mb-1">Rikki</h3>
                           <p class="text-muted m-0">Junior Front-end-Developer</p>
@@ -194,9 +197,10 @@
                           <i class="fas fa-star"></i>
                       </div>
               </div>
+              
               <div class=" carousel-item  bg-white shadow-lg rounded p-4 mb-5">
                   <div class="testi-author-info d-flex align-items-center">
-                      <img src="./images/port.png"  alt="info" width="304" height="236">
+                      <img src='./images/port.png'  alt="info" width="304" height="236">
                       <div class="author ms-3">
                           <h3 class="fs-6 mb-1">Maria</h3>
                           <p class="text-muted m-0">Junior Front-end-Developer</p>
@@ -211,6 +215,7 @@
                           <i class="fas fa-star"></i>
                       </div>
               </div>
+              
              </div>
            </div>
        </div>
@@ -221,7 +226,7 @@
 
  
 <footer class="py-3 text-center bg-secondary text-white">
-    <p>Copy Right @ CodeDen</p>
+    <p> CodeDen</p>
 </footer>
    
     <script
