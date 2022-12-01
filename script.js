@@ -1,5 +1,4 @@
-//variable to target elemnts
-
+//const form = document.querySelector("#form");
 const inputValue = document.getElementById("InputValue");
 const assignValue = document.getElementById("assignValue");
 const statusValue = document.getElementById("statusValue");
@@ -65,7 +64,7 @@ class Task {
     dateValue.value = "";
     submitBtn.value = "";
   }
-  //delete Task 
+  //delete Task
   removeTask(taskId) {
     const newObj = [];
     for (let i = 0; i < this.taskArr.length; i++) {
@@ -78,8 +77,7 @@ class Task {
     console.log(this.taskArr);
   }
 
-
-  //getting task from array 
+  //getting task from array
   getTask(taskId) {
     let getTask;
     for (let i = 0; i < this.taskArr.length; i++) {
@@ -90,7 +88,7 @@ class Task {
     }
     return getTask;
   }
-//saving to local storage
+  //saving to local storage
   saveToLstorage() {
     const taskStingify = JSON.stringify(this.taskArr);
     // console.log(taskStingify);
@@ -106,43 +104,65 @@ class Task {
       this.taskArr = JSON.parse(getData);
       console.log(this.taskArr);
     }
-     if (localStorage.getItem("Id")) {
+    if (localStorage.getItem("Id")) {
       const Id = localStorage.getItem("Id");
       this.Id = Number(Id);
     }
   }
 
-    // display task card 
-    displayPage() {
-      const htmlList = [];
-      for (let i = 0; i < this.taskArr.length; i++) {
-        const tasks = this.taskArr[i];
-        const taskHtml = createBootstrap(
-          tasks.id,
-          tasks.taskName,
-          tasks.assign,
-          tasks.date,
-          tasks.status,
-          tasks.desc
-        );
-        htmlList.push(taskHtml);
-      }
-      const tasksHtml = htmlList.join("\n");
-      const taskList = document.querySelector("#task-card");
-      taskList.innerHTML = tasksHtml;
+  // display task card
+  displayPage() {
+    const htmlList = [];
+    for (let i = 0; i < this.taskArr.length; i++) {
+      const tasks = this.taskArr[i];
+      const taskHtml = createBootstrap(
+        tasks.id,
+        tasks.taskName,
+        tasks.assign,
+        tasks.date,
+        tasks.status,
+        tasks.desc
+      );
+      htmlList.push(taskHtml);
     }
-        
-// display task card by status
+    const tasksHtml = htmlList.join("\n");
+    const taskList = document.querySelector("#task-card");
+    taskList.innerHTML = tasksHtml;
+  }
+
+  // display task card by status
   displayByStatus(status) {
     const htmlList = [];
-    for (let i = 0; i < this.taskArr.length; i++) {  
+    for (let i = 0; i < this.taskArr.length; i++) {
       const task = this.taskArr[i];
       if (task.status === status) {
-        const taskHtml = createBootstrap(taskArr[i].id, taskArr[i].taskName, taskArr[i].assign, taskArr[i].date, taskArr[i].status, taskArr[i].desc);
+        const taskHtml = createBootstrap(
+          this.taskArr[i].id,
+          this.taskArr[i].taskName,
+          this.taskArr[i].assign,
+          this.taskArr[i].date,
+          this.taskArr[i].status,
+          this.taskArr[i].desc
+        );
         htmlList.push(taskHtml);
         const tasksHtml = htmlList.join("\n");
         const taskList = document.querySelector("#task-card");
         taskList.innerHTML = tasksHtml;
+      }
+    }
+  }
+  //  filter tasks by status
+  getTasksWithStatus(option) {
+    document.getElementById("task-card").innerHTML = "";
+    this.taskArr = JSON.parse(localStorage.getItem("task"));
+    if (this.taskArr === null) {
+      this.taskArr = [];
+    }
+    for (let i = 0; i < this.taskArr.length; i++) {
+      if (option === "ALL-STATUS") {
+        taskClass.displayPage();
+      } else if (option === this.taskArr[i].status) {
+        taskClass.displayByStatus(option);
       }
     }
   }
@@ -173,45 +193,35 @@ submitBtn.addEventListener("click", (event) => {
   }
 });
 
-// function to filter tasks by status
-function getTasksWithStatus(option) {
-  document.getElementById("task-card").innerHTML = "";
-  taskArr = JSON.parse(localStorage.getItem('task'));
-  if (taskArr === null) {
-    taskArr = [];    
-  } 
-  for (let i = 0; i < taskArr.length; i++) {
-    if (option === "ALL-STATUS") {
-      taskClass.displayPage();                      
-    } else if (option === taskArr[i].status) {
-        taskClass.displayByStatus(option);
-      };
-    };
-};             
-
 // function to choose a status for filtering the display of task cards
-const filterStatus = document.getElementById('statusValueFiltered');
+const taskStatus = document.getElementById("task-status")
+const filterStatus = document.getElementById("statusValueFiltered");
 let option;
-filterStatus.addEventListener("click", function() {
+filterStatus.addEventListener("click", function () {
   let sthing = statusValueFiltered.value;
-  switch(sthing) {
-  case "STARTED":
-    option = "STARTED";
-    break;
-  case "IN-PROGRESS":
-    option = "IN-PROGRESS";
-    break;
-  case "REVIEWED":
-    option = "REVIEWED";
-    break;
-  case "DONE":
-    option = "DONE";
-    break;
-  case "ALL-STATUS":
-    option = "ALL-STATUS";
-    break;
+  switch (sthing) {
+    case "STARTED":
+      option = "STARTED"
+      taskStatus.textContent="STARTED"
+      taskStatus.style.backgrounColor = "red"
+      break;
+    case "IN-PROGRESS":
+      option = "IN-PROGRESS"
+      taskStatus.textContent="IN-PROGRESS"
+       break;
+       case "REVIEWED":
+      option = "REVIEWED"
+      taskStatus.textContent="REVIEWED"
+      break;
+    case "DONE":
+      option = "DONE"
+      taskStatus.textContent="DONE"
+      break;
+    case "ALL-STATUS":
+      option = "ALL-STATUS"
+      break;
   }
-  getTasksWithStatus(option);
+  taskClass.getTasksWithStatus(option);
 });
 
 // valid form after all field filled true or false
@@ -310,6 +320,6 @@ taskCard.addEventListener("click", (event) => {
 
 ///refresh page
 const reload = document.getElementById("reloadBtn");
-   reload.addEventListener('click', ()=>{
-    window.location.reload()
-   })
+reload.addEventListener("click", () => {
+  window.location.reload();
+});
