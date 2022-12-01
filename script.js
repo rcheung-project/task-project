@@ -1,4 +1,5 @@
-//const form = document.querySelector("#form");
+//variable to target elemnts
+
 const inputValue = document.getElementById("InputValue");
 const assignValue = document.getElementById("assignValue");
 const statusValue = document.getElementById("statusValue");
@@ -228,7 +229,7 @@ function isFormValid() {
 function validateForm() {
   //Task Name
   if (inputValue.value.trim() === "") {
-    setError(inputValue, "*Please Enter Your Name");
+    setError(inputValue, "*Please Enter Task Name");
   } else {
     setSuccess(inputValue);
   }
@@ -240,14 +241,14 @@ function validateForm() {
   }
   //Status
   if (statusValue.value === "") {
-    setError(statusValue, "*Please Choose Your Status");
+    setError(statusValue, "*Please Choose Task Status");
   } else {
     setSuccess(statusValue);
   }
 
   //date
   if (dateValue.value == "") {
-    setError(dateValue, "*Please Choose Your Due Date");
+    setError(dateValue, "*Please Choose Task Due Date");
   } else {
     setSuccess(dateValue);
   }
@@ -306,3 +307,9 @@ taskCard.addEventListener("click", (event) => {
     taskClass.displayPage();
   }
 });
+
+///refresh page
+const reload = document.getElementById("reloadBtn");
+   reload.addEventListener('click', ()=>{
+    window.location.reload()
+   })
