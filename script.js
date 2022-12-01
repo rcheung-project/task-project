@@ -110,24 +110,40 @@ class Task {
       this.Id = Number(Id);
     }
   }
-  // display task card 
-  displayPage() {
-    const htmlList = [];
-    for (let i = 0; i < this.taskArr.length; i++) {
-      const tasks = this.taskArr[i];
-      const taskHtml = createBootstrap(
-        tasks.id,
-        tasks.taskName,
-        tasks.assign,
-        tasks.date,
-        tasks.status,
-        tasks.desc
-      );
-      htmlList.push(taskHtml);
+
+    // display task card 
+    displayPage() {
+      const htmlList = [];
+      for (let i = 0; i < this.taskArr.length; i++) {
+        const tasks = this.taskArr[i];
+        const taskHtml = createBootstrap(
+          tasks.id,
+          tasks.taskName,
+          tasks.assign,
+          tasks.date,
+          tasks.status,
+          tasks.desc
+        );
+        htmlList.push(taskHtml);
+      }
+      const tasksHtml = htmlList.join("\n");
+      const taskList = document.querySelector("#task-card");
+      taskList.innerHTML = tasksHtml;
     }
-    const tasksHtml = htmlList.join("\n");
-    const taskList = document.querySelector("#task-card");
-    taskList.innerHTML = tasksHtml;
+        
+// display task card by status
+  displayByStatus(status) {
+    const htmlList = [];
+    for (let i = 0; i < this.taskArr.length; i++) {  
+      const task = this.taskArr[i];
+      if (task.status === status) {
+        const taskHtml = createBootstrap(taskArr[i].id, taskArr[i].taskName, taskArr[i].assign, taskArr[i].date, taskArr[i].status, taskArr[i].desc);
+        htmlList.push(taskHtml);
+        const tasksHtml = htmlList.join("\n");
+        const taskList = document.querySelector("#task-card");
+        taskList.innerHTML = tasksHtml;
+      }
+    }
   }
 }
 
@@ -167,18 +183,12 @@ function getTasksWithStatus(option) {
     if (option === "ALL-STATUS") {
       taskClass.displayPage();                      
     } else if (option === taskArr[i].status) {
-        const taskHtml = createBootstrap(taskArr[i].id, taskArr[i].taskName, taskArr[i].assign, taskArr[i].date, taskArr[i].status, taskArr[i].desc);
-        taskArr.push(taskHtml);
-        const tasksHtml = taskArr.join('\n');
-        const taskList = document.querySelector('#task-card');
-        taskList.innerHTML = tasksHtml;  
-        };
-      };             
- };
-
+        taskClass.displayByStatus(option);
+      };
+    };
+};             
 
 // function to choose a status for filtering the display of task cards
-
 const filterStatus = document.getElementById('statusValueFiltered');
 let option;
 filterStatus.addEventListener("click", function() {
