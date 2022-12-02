@@ -31,7 +31,9 @@ const createBootstrap = (id, taskName, assign, date, status, desc) => {
          <button class="btn-background bg-success text-white mx-5 btn btn-outline-success done-button mr-1 ${
            status === "DONE" ? "invisible" : "visible"
          }">Mark As Done</button>
-         <button class="btn-background bg-danger text-white mx-5 btn btn-outline-danger delete-button">Delete</button>
+         <button class="btn-background bg-danger text-white mx-5 btn btn-outline-danger delete-button  ${
+          status === "DONE" ? "invisible" : "visible"
+        }">Delete</button>
      </div>
      </div>
 `;
